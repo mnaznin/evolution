@@ -55,6 +55,42 @@ function bouncer(age) {
 
 console.log(bouncer(90))
 
+function scoreToGrade(num) {
+  if (num >100){
+    return "Invalid score";
+  } else if (num >= 90) {
+    return "A: " + num;
+  } else if (num >= 80){
+    return "B: " + num;
+  }
+  return "C: " + num;
+}
+
+console.log(scoreToGrade(105))
+
+// testing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
