@@ -41,9 +41,3 @@ function sayHello(cow){
 display(sayHello("Naznin"));
 
 
-function drinkingAge()
-
-
-
-
-
