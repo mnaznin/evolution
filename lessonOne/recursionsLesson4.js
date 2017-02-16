@@ -1,8 +1,22 @@
 // Summation to n: Let's implement the function sum that takes a single parameter n, and computes the sum of all integers up to n starting from 0, e.g.:
 
 function sum(n) {
-  // TODO: your code here
+  if (n === 0) {
+    return 0;
+  } 
+  return n + sum(n-1);
 }
+
+// var sum = function(n) {
+//   if (n === 0) {
+//     return 0;
+//   } 
+//   return n + sum(n-1);
+// }
+
+console.log(sum(4));
+
+
 // sum(3); // => 3 + 2 + 1 + 0 => 6
 // sum(4); // => 4 + 3 + 2 + 1 + 0 => 10
 // sum(5); // => 5 + 4 + 3 + 2 + 1 + 0 => 15
@@ -11,8 +25,14 @@ function sum(n) {
 // Factorial of n: The factorial of n is the product of all the integers preceding n, starting with 1, e.g.:
 
 function factorial(n) {
-  // TODO: your code here
+  if (n === 0) {
+    return 1;
+  }
+  return n * factorial(n-1);
 }
+
+console.log(factorial(4));
+
 // factorial(3); // => 3 * 2 * 1 => 6
 // factorial(4); // => 4 * 3 * 2 * 1 => 24
 // factorial(5); // => 5 * 4 * 3 * 2 * 1 => 120
@@ -21,12 +41,20 @@ function factorial(n) {
 // Repeating a String n Times: Let's write a function called repeatString that takes two parameters: a string str, which is the string to be repeated, and count -- a number representing how many times the string str should be repeated, e.g.
 
 function repeatString(str, count) {
-  // TODO: your code here
+  if (count === 1){
+    return str;
+  }
+  return str + repeatString(str, count-1);
 }
-repeatString('dog', 0); // => ''
-repeatString('dog', 1); // => 'dog'
-repeatString('dog', 2); // => 'dog' + 'dog' => 'dogdog'
-repeatString('dog', 3); // => 'dog' + 'dog' + 'dog' => 'dogdogdog'
+
+console.log(repeatString("dog",5));
+
+
+
+// repeatString('dog', 0); // => ''
+// repeatString('dog', 1); // => 'dog'
+// repeatString('dog', 2); // => 'dog' + 'dog' => 'dogdog'
+// repeatString('dog', 3); // => 'dog' + 'dog' + 'dog' => 'dogdogdog'
 // Your task is to implement the repeatString function using the observation that to repeat a string some count, we can concatenate that string onto the result of repeating the string count - 1.
 
 // HINT: Observe that repeatString('dog', 0) should yield the empty string, ''. What happens if you evaluate this: '' + 'dog'?
@@ -45,28 +73,83 @@ repeatString('dog', 3); // => 'dog' + 'dog' + 'dog' => 'dogdogdog'
 // fib(n) is fib(n - 1) + fib(n - 2)
 // Write a function called fib that accepts a number n as a parameter and computes the nth fibonacci number using the above rules.
 
+function fib(n){
+  //console.log('before if? ', n);
+  if (n >= 2) {
+    //console.log('what the heck is n? ', n);
+     return fib(n-1) + fib(n-2);
+  }
+     return 1;
+}
+
+console.log(fib(7));
+
 // More Practice
 // Modify your sum function from the Basic Requirements section to accept two parameters, start and end: sum should now compute the sum of the numbers from start to end, e.g.
 
-function sum(start, end) {
-  // TODO: your code here
+function sum1(start, end) {
+ if (end === start){
+  return end;
+ }
+ return start + sum1(start-1, end);
 }
-sum(2, 7); // => 2 + 3 + 4 + 5 + 6 + 7 => 27
-sum(3, 5); // => 3 + 4 + 5 => 12
+
+console.log(sum1(7,2));
+// sum(2, 7); // => 2 + 3 + 4 + 5 + 6 + 7 => 27
+// sum(3, 5); // => 3 + 4 + 5 => 12
 // What happens if start is larger than end? Modify sum to check for this case and, when found, swap the start and end arguments.
 // Write a function product that works like sum, except it should compute the product of the numbers from start to end.
+
+function product(start, end){ // 1, 1
+  if (start <= 0 || end <= 0){
+    return 1;
+  } else if (start < end){ // 1 < 1
+    return end + product(start, end - 1);
+  }
+  return start + product(start - 1, end); // 0, 1
+}
+//4 === 24
+//3 === 6
+//2 === 2
+//1 === 
+
+ console.log('PRODUCT: ', product(4,1));
+
+ function easyWay(start, end) {
+  if (start > end) {
+    //the user screwed up
+    //he meant to put the smallest number first 
+    //he meant to put the largest number second
+    //let's input it the way the dumb user should have and start over
+    return easyWay(end, start)
+  };
+  if (start === end) {
+    return 1;
+  };
+  return end * easyWay(start, end - 1);
+ }
+
+ console.log('easyWay: ', easyWay(4,1));
 
 // Refactor your factorial function from earlier to be implemented in terms of product.
 // Let's pretend for a moment that JavaScript does not have the addition operator + -- instead, it comes with two functions called inc and dec that perform increment and decrement respectively:
 
 // // ignore the fact that inc makes use of +
 function inc(x) {
-  return x + 1;
+ return x + 1;
 }
 
 function dec(x) {
-  return x - 1;
+return x - 1;
 }
+
+function add(x, y){
+  if (y === 0) {
+    return x;
+  }
+  return add(inc(x),dec(y));
+}
+console.log('ADD: ', add(10,10));
 // Your task is to write a function called add that takes two numbers as parameters, x and y, and adds them together. The catch is that you can only use inc and dec to accomplish this.
 
 // Write a function called isEven that, given a number n as a parameter, returns true if that number is even, and false otherwise; however, you need to do this without using the % operator.
